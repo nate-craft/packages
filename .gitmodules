@@ -1,0 +1,6 @@
+[submodule "auditorium"]
+	path = auditorium
+	url = ssh://aur@aur.archlinux.org/auditorium.git
+[submodule "auditorium-minimal"]
+	path = auditorium-minimal
+	url = ssh://aur@aur.archlinux.org/auditorium-minimal.git
