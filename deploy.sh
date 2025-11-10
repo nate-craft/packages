@@ -6,7 +6,7 @@ panic() {
 }
 
 # Automatically downloads file metadata, updates sha256sums + version field, and uploads to aur remote
-upload_auditorium() {
+upload_pkg() {
     (
         cd "$1" || panic "Could not cd into ${1}"
         CHECKSUM=$(makepkg -g) || panic "Could not genererate checksum"
@@ -16,13 +16,18 @@ upload_auditorium() {
         makepkg --sign -f || panic "Could not sign package"
         makepkg --printsrcinfo > .SRCINFO || panic "Could not generate SRCINFO file"
 
-        git add .
+        git checkout -b master
+        git add PKGBUILD .SRCINFO
+        git tag "$2"
         git commit -m "Version $2"
-        git push --set-upstream aur master
+        git push --set-upstream origin master
     )
 }
 
 VERSION=$(curl -s "https://api.github.com/repos/nate-craft/auditorium/releases/latest" | jq -r .tag_name)
-upload_auditorium "auditorium" "$VERSION" "auditorium-v${VERSION}-linux-amd64"
-upload_auditorium "auditorium-minimal" "$VERSION" "auditorium-minimal-v${VERSION}-linux-amd64"
+upload_pkg "auditorium" "$VERSION" "auditorium-v${VERSION}-linux-amd64"
+upload_pkg "auditorium-minimal" "$VERSION" "auditorium-minimal-v${VERSION}-linux-amd64"
+
+VERSION=$(curl -s "https://api.github.com/repos/nate-craft/yt-feeds/releases/latest" | jq -r .tag_name)
+upload_pkg "yt-feeds" "$VERSION" "yt-feeds-v${VERSION}-linux-amd64"
 
