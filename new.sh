@@ -11,8 +11,12 @@ fi
 
 git clone ssh://aur@aur.archlinux.org/${1}.git || panic "Could not clone AUR repository"
 mkdir "$1"
+
 cp reference/PKGBUILD "$1" || panic "Could not copy over PKGBUILD"
+cp reference/.gitignore "$1" || panic "Could not copy over gitignore"
+
 sed -i "s/PACKAGE_NAME/${1}/g" "${1}/PKGBUILD" || panic "Could not replace package name in PKGBUILD"
+sed -i "s/PACKAGE_NAME/${1}/g" "${1}/.gitignore" || panic "Could not replace package name in .gitignore"
 
 echo "[submodule \"${1}\"]
 	path = \"${1}\"

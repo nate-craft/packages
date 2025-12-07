@@ -8,9 +8,9 @@ url="https://github.com/nate-craft/PACKAGE_NAME"
 license=('MIT')
 depends=()
 conflicts=()
-source=("https://github.com/nate-craft/PACKAGE_NAME/releases/download/${pkgver}/PACKAGE_NAME-v${pkgver}-linux-amd64")
+source=("https://github.com/nate-craft/PACKAGE_NAME/releases/download/${pkgver}/PACKAGE_NAME-${pkgver}-x86_64-unknown-linux-gnu")
 sha256sums=()
 
 package() {
-    install -Dm755 "$srcdir/PACKAGE_NAME-v${pkgver}-linux-amd64" "$pkgdir/usr/bin/PACKAGE_NAME"
+    install -Dm755 "$srcdir/PACKAGE_NAME-${pkgver}-linux-x86_64-unknown-linux-gnu" "$pkgdir/usr/bin/PACKAGE_NAME"
 }

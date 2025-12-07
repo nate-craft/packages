@@ -7,3 +7,6 @@
 [submodule "yt-feeds"]
 	path = yt-feeds
 	url = ssh://aur@aur.archlinux.org/yt-feeds.git
+[submodule "dashi"]
+	path = dashi
+	url = ssh://aur@aur.archlinux.org/dashi.git
